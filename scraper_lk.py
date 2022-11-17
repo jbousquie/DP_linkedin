@@ -13,6 +13,7 @@ CSV_FILE = 'output/jets_iramuteq.txt'
 with open(INPUT_FILE) as input_file:
     data_soup = BeautifulSoup(input_file, 'lxml')
     articles = data_soup.find_all('article', class_='comments-comment-item')
+    counter = 1
     for article in articles:
         post_text = ''
         reply_count = ''
@@ -38,8 +39,10 @@ with open(INPUT_FILE) as input_file:
         if reply_count == '':
             reply_count = '0'
         
-        if reply_count == '':
-            reaction_button = '0'
+        if reaction_count == '':
+            reaction_count = '0'
 
-        line = '**** *num_1 *reactions_' + reaction_count + ' *comments_' + reply_count + '\n'
+        line = '**** *num_' + str(counter) + ' *reactions_' + reaction_count + ' *comments_' + reply_count + '\n'
+        line = line + post_text + '\n'
+        counter += 1
         print(line)

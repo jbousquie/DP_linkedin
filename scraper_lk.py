@@ -7,8 +7,8 @@
 
 from bs4 import BeautifulSoup
 
-INPUT_FILE = 'html/LinkedinWagnerJetsPrives.html'
-IRAMUTEQ_FILE = 'output/jets_iramuteq.txt'
+INPUT_FILE = 'html/CorpusIramuteq2.html'
+IRAMUTEQ_FILE = 'output/jets_iramuteq2.txt'
 
 # Python code to find the URL from an input string
 # Using the regular expression
@@ -27,7 +27,8 @@ def find_urls(string):
 
 with open(INPUT_FILE) as input_file:
     data_soup = BeautifulSoup(input_file, 'lxml')
-    articles = data_soup.find_all('article', attrs={'class': ['comments-comment-item', 'comments-comments-list__comment-item', 'comments-reply-item', 'reply-item']})
+    #articles = data_soup.find_all('article', attrs={'class': ['comments-comment-item', 'comments-comments-list__comment-item', 'comments-reply-item', 'reply-item']})
+    articles = data_soup.find_all('article', attrs={'class': ['comments-comment-item']})
     counter = 1
     with open(IRAMUTEQ_FILE, 'w') as output_file:
         for article in articles:
@@ -36,12 +37,12 @@ with open(INPUT_FILE) as input_file:
             reaction_count = ''
             spantexts = article.find_all('span', class_='comments-comment-item__main-content')
             for spantext in spantexts:
-                ltr = spantext.find('span', {"dir": "ltr"})
+                ltr = spantext.find('div', class_='update-components-text')
                 if ltr is not None:
                     if post_text == '':
                         post_text = ltr.text
-                    else :
-                        post_text = post_text + '\n' + ltr.text
+                    #else :
+                    #    post_text = post_text + '\n' + ltr.text
             
             span_replycount = article.find('span', class_='comments-comment-social-bar__replies-count')
             if span_replycount is not None:
@@ -66,4 +67,5 @@ with open(INPUT_FILE) as input_file:
             line = line + post_text + '\n'
             output_file.write(line)
             counter += 1
+            
             

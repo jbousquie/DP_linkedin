@@ -11,6 +11,7 @@ INPUT_FILE = 'html/CorpusIramuteq2.html'
 IRAMUTEQ_FILE = 'output/jets_iramuteq3.txt'
 DATA_CSV = 'output/jets_iramuteq3.csv'
 SEP = '|'
+CSV_HEADER = 'num|nb_reactions|nb_commentaires|texte_post\n'
 
 # Python code to find the URL from an input string
 # Using the regular expression
@@ -34,6 +35,7 @@ with open(INPUT_FILE) as input_file:
     counter = 1
     with open(IRAMUTEQ_FILE, 'w') as output_file:
         with  open(DATA_CSV, 'w') as csv_file:
+            csv_file.write(CSV_HEADER)
             for article in articles:
                 post_text = ''
                 reply_count = ''

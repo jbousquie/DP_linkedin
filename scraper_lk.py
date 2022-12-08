@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 INPUT_FILE = 'html/CorpusIramuteq2.html'
 IRAMUTEQ_FILE = 'output/jets_iramuteq3.txt'
 DATA_CSV = 'output/jets_iramuteq3.csv'
-SEP = '|'
+SEP = 'Ø'
 CSV_HEADER = 'num|nb_reactions|nb_commentaires|texte_post\n'
 
 # Python code to find the URL from an input string
